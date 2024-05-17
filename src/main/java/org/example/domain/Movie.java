@@ -13,6 +13,6 @@ public class Movie {
     private String director;
     private String Trailer;
     private int quantity;
-    private String Photo;
+    private String path;
 
 }
