@@ -11,6 +11,7 @@ CREATE TABLE Users (
         idMovie INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         title VARCHAR(255),
         director VARCHAR(255),
+        synopsis VARCHAR(1000),
         trailer VARCHAR(500),
         quantity INT,
         path VARCHAR(255) 
