@@ -6,11 +6,20 @@
 
     <display-name>Videoclub</display-name>
 
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>org.example.servlet.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <context-param>
         <description>Ruta donde guardar las imágenes</description>
         <param-name>image-path</param-name>
         <param-value>/home/astable/apache-tomcat-9.0.86/webapps/parque_pictures</param-value>
     </context-param>
 
-
 </web-app>
+

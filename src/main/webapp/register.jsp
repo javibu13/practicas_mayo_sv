@@ -24,9 +24,6 @@
             <label for="phoneNumber">Número de Teléfono</label>
             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
         </div>
-
-
-
         <div class="form-group">
             <label for="password">Contraseña</label>
             <input type="password" class="form-control" id="password" name="password" required>
