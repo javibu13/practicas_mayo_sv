@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class Movie {
     private int idMovie;
-    private String tittle;
+    private String title;
     private String director;
-    private String Trailer;
+    private String trailer;
     private int quantity;
     private String path;
-
 }
