@@ -23,12 +23,15 @@ public interface UsersDao {
     @UseRowMapper(UsersMapper.class)
     User getUser(int idUser);
 
-    @SqlUpdate ("INSERT INTO USERS (idUser, firstName, lastName, email, phoneNumber, password) VALUES (?, ?, ?, ?, ?, ?)")
-    int addUser(int idUser, String firstName, String lastName, String email, String phoneNumber, String password);
+    @SqlUpdate ("INSERT INTO USERS (firstName, lastName, email, phoneNumber, password) VALUES (?, ?, ?, ?, ?)")
+    void addUser(String firstName, String lastName, String email, String phoneNumber, String password);
 
     @SqlUpdate("UPDATE USERS SET idUser = ?, firstName = ?, lastName = ?, email = ?, phoneNumber = ?, password = ? WHERE idUser = ?")
-    int updateUser(int idUser, String firstName, String lastName, String email, String phoneNumber, String password);
+    void updateUser(int idUser, String firstName, String lastName, String email, String phoneNumber, String password);
 
     @SqlUpdate("DELETE FROM USERS WHERE idUser = ?")
-    int removeUser(int idUser);
-}
+    void
+    removeUser(int idUser);
+    @SqlQuery("SELECT COUNT(*) FROM users WHERE email = :email")
+    boolean emailExists(@Bind("email") String email);
+  }

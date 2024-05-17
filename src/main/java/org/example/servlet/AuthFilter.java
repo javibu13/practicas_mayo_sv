@@ -16,11 +16,15 @@ public class AuthFilter implements Filter {
         HttpSession session = req.getSession(false);
         boolean loggedIn = (session != null && session.getAttribute("user") != null);
         String loginURI = req.getContextPath() + "/login.jsp";
+        String registerjspURI = req.getContextPath() + "/register.jsp";
+        String registerURI = req.getContextPath() + "/register";
 
         boolean loginRequest = req.getRequestURI().equals(loginURI);
+        boolean registerjspRequest = req.getRequestURI().equals(registerjspURI);
+        boolean registerRequest = req.getRequestURI().equals(registerURI);
         boolean staticResource = req.getRequestURI().startsWith(req.getContextPath() + "/static/");
 
-        if (loggedIn || loginRequest || staticResource) {
+        if (loggedIn || loginRequest || registerRequest || staticResource || registerjspRequest) {
             chain.doFilter(request, response);
         } else {
             ((HttpServletResponse) response).sendRedirect(loginURI);
