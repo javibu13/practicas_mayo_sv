@@ -27,7 +27,7 @@
                             <form action="${pageContext.request.contextPath}/loanMovie" method="post">
                                 <input type="hidden" name="idMovie" value="${movie.idMovie}">
                                 <input type="hidden" name="action" value="return">
-                                <button type="submit" class="btn btn-primary">Return Movie</button>
+                                <button type="submit" class="btn btn-warning">Return Movie</button>
                             </form>
                         </c:when>
                         <c:otherwise>
