@@ -1,0 +1,28 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.no-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+div.panel {
+    margin: 0 auto;
+    width: 90%;
+    padding: 25px;
+    border: 1px solid #3030308a;
+    border-radius: 13px;
+    background-color: #fafafa;
+    box-shadow: 0 0 30px #30303030;
+}
+
+img.fixed-table-image-size {
+    width: 100px;
+}
+
+img.fixed-details-image-size {
+    width: 100%;
+}
