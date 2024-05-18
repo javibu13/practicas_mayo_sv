@@ -23,6 +23,10 @@ public interface UsersDao {
     @UseRowMapper(UsersMapper.class)
     User getUser(int idUser);
 
+    @SqlQuery("SELECT * FROM USERS WHERE email = :email")
+    @UseRowMapper(UsersMapper.class)
+    User getUserByEmail(@Bind("email") String email);
+
     @SqlUpdate ("INSERT INTO USERS (firstName, lastName, email, phoneNumber, password) VALUES (?, ?, ?, ?, ?)")
     void addUser(String firstName, String lastName, String email, String phoneNumber, String password);
 
@@ -31,6 +35,7 @@ public interface UsersDao {
 
     @SqlUpdate("DELETE FROM USERS WHERE idUser = ?")
     void removeUser(int idUser);
+    
     @SqlQuery("SELECT COUNT(*) FROM users WHERE email = :email")
     boolean emailExists(@Bind("email") String email);
   }

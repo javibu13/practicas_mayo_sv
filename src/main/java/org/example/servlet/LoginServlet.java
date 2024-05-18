@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.example.dao.Database;
 import org.example.dao.UsersDao;
+import org.example.domain.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -29,8 +31,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        System.out.println(email);
-        System.out.println(password);
         
         try {
             boolean emailExists = Database.getInstance().withExtension(UsersDao.class, dao -> {
@@ -38,13 +38,21 @@ public class LoginServlet extends HttpServlet {
             });
 
             if (emailExists) {
-                // Implement the login logic here
-                // Database.getInstance().withExtension(UsersDao.class, dao -> {
-                //     dao.addUser(firstName, lastName, email, phoneNumber, password);
-                //     return null;
-                // });
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("success");
+                User userFromDB = Database.getInstance().withExtension(UsersDao.class, dao -> {
+                    return dao.getUserByEmail(email);
+                });
+                boolean userAndPassCorrect = userFromDB.getPassword().equals(password);
+                if (userAndPassCorrect) {
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    response.getWriter().write("success");
+
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("idUser", userFromDB.getIdUser());
+                    response.sendRedirect("listMovies");
+                } else {
+                    response.setStatus(HttpServletResponse.SC_CONFLICT);
+                    response.getWriter().write("Incorrect password");
+                }
             } else {
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
                 response.getWriter().write("Account not registered");

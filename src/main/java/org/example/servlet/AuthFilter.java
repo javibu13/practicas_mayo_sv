@@ -14,7 +14,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(false);
-        boolean loggedIn = (session != null && session.getAttribute("user") != null);
+        boolean loggedIn = (session != null && session.getAttribute("idUser") != null);
         String loginURI = req.getContextPath() + "/login";
         // String registerjspURI = req.getContextPath() + "/register.jsp";
         String registerURI = req.getContextPath() + "/register";
