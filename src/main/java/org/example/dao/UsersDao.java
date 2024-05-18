@@ -30,8 +30,7 @@ public interface UsersDao {
     void updateUser(int idUser, String firstName, String lastName, String email, String phoneNumber, String password);
 
     @SqlUpdate("DELETE FROM USERS WHERE idUser = ?")
-    void
-    removeUser(int idUser);
+    void removeUser(int idUser);
     @SqlQuery("SELECT COUNT(*) FROM users WHERE email = :email")
     boolean emailExists(@Bind("email") String email);
   }
