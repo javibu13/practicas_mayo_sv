@@ -32,4 +32,13 @@ public interface MoviesDao {
     @SqlUpdate("DELETE FROM MOVIES WHERE idMovie = ?")
     int removeMovie(int idMovie);
 
+    @SqlUpdate("SELECT " +
+            "    (SELECT quantity FROM MOVIES WHERE idMovie = :idMovie) - " +
+            "    (SELECT COUNT(idLoan) FROM LOANS WHERE idMovie = :idMovie AND returnDate IS NULL) AS available_quantity" +
+            "FROM DUAL")
+    int getActualStock(@Bind("idMovie") int idMovie);
+
+    @SqlUpdate("UPDATE movies SET quantity = quantity + 1 WHERE idMovie = :idMovie")
+    void increaseMoviesQuantity(@Bind("idMovie") int idMovie);
+
 }

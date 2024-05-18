@@ -8,7 +8,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface LoansDao {
@@ -26,8 +26,8 @@ public interface LoansDao {
     @UseRowMapper(LoansMapper.class)
     Loan getLoan(int idLoan);
 
-    @SqlUpdate ("INSERT INTO LOANS (idLoan, idMovie, idUser, startDate,expectedDate, returnDate) VALUES (?, ?, ?, ?, ?, ?)")
-    int addLoan(int idLoan, int idMovie, int idUser, Date startDate, Date expectedDate, Date returnDate);
+    @SqlUpdate ("INSERT INTO LOANS ( idMovie, idUser, startDate, expectedDate) VALUES (?, ?, ?, ?)")
+    void addLoan( int idMovie, int idUser, Date startDate, Date expectedDate);
 
     @SqlUpdate("UPDATE LOANS SET idLoan = ?, idMovie = ?, idUser = ?, startDate = ?, expectedDate = ?, returnDate = ? WHERE idLoan = ?")
     int updateLoan(int idLoan, int idMovie, int idUser, Date startDate, Date expectedDate, Date returnDate);
