@@ -2,7 +2,6 @@ package org.example.servlet;
 
 import org.example.dao.Database;
 import org.example.dao.UsersDao;
-import org.example.util.PasswordUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
