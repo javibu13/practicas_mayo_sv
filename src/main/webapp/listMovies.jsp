@@ -12,7 +12,7 @@
         <tr>
             <th data-align="center" data-halign="center">Title</th>
             <th data-align="center" data-halign="center">Director</th>
-            <th data-align="center" data-halign="center">Synopsis</th>
+            <th                     data-halign="center">Synopsis</th>
             <th data-align="center" data-halign="center">Trailer</th>
             <th data-align="center" data-halign="center">Image</th>
         </tr>
