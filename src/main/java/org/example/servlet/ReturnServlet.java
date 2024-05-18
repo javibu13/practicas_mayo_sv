@@ -31,17 +31,12 @@ public class ReturnServlet extends HttpServlet {
                 }
 
 
-                //Obtener idMovie para incrementar cantidad
                 int idMovie = handle.createQuery("SELECT idMovie FROM loans WHERE idLoan = :idLoan")
                         .bind("idLoan", idLoan)
                         .mapTo(Integer.class)
                         .findOnly();
 
-
-
                 return null;
-
-
             });
             response.sendRedirect("listLoans?success= Movie returned");
         } catch (Exception e) {

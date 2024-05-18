@@ -20,8 +20,8 @@
         <tbody>
         <c:forEach var="movie" items="${movies}">
             <tr>
-                <td data-field="title" data-sortable="true" ><a href="/Videoclub/movieDetails?idMovie=${movie.idMovie}">${movie.title}</a></td>
-                <td data-field="director" data-sortable="true" >${movie.director}</td>
+                <td data-field="title" data-sortable="true"><a href="${pageContext.request.contextPath}/movieDetails?id=${movie.idMovie}">${movie.title}</a></td>
+                <td data-field="director" data-sortable="true">${movie.director}</td>
                 <td data-field="synopsis">${movie.synopsis}</td>
                 <td data-field="trailer" ><a class="no-link" href="${movie.trailer}"><i class="bi bi-camera-reels"></i></a></td>
                 <td data-field="image" ><img class="fixed-table-image-size" src="${staticPath}${movie.path}"></td>

@@ -18,7 +18,8 @@ public class MoviesMapper implements RowMapper<Movie>{
                 rs.getString("synopsis"),
                 rs.getString("trailer"),
                 rs.getInt("quantity"),
-                rs.getString("path")
+                rs.getString("path"),
+                false
 
         );
     }

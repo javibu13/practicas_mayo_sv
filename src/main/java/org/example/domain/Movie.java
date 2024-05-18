@@ -15,4 +15,13 @@ public class Movie {
     private String trailer;
     private int quantity;
     private String path;
+    private boolean isRentedByUser;
+
+    public boolean isRentedByUser() {
+        return isRentedByUser;
+    }
+
+    public void setRentedByUser(boolean rentedByUser) {
+        isRentedByUser = rentedByUser;
+    }
 }
