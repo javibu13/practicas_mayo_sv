@@ -1,51 +1,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Portatil
-  Date: 18/05/2024
-  Time: 10:54
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Active Loans</title>
 </head>
 <body>
 <main class="container mt-5">
-    <h1 class="text-center mb-3">Préstamos Activos</h1>
+    <h1 class="text-center mb-3">Active Loans</h1>
     <table class="table table-hover table-striped">
         <thead class="table-dark">
         <tr>
-            <th>Movie Tittle</th>
-            <th>Loan start date</th>
-            <th>Expected Return date</th>
+            <th>Movie Title</th>
+            <th>Loan Start Date</th>
+            <th>Expected Return Date</th>
+            <th>Returned Date</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${loans}" var="loan">
             <tr>
-                <td>${loan.bookTitle}</td>
-                <td><fmt:formatDate value="${loan.loanDate}" pattern="dd/MM/yyyy"/></td>
-                <td><fmt:formatDate value="${loan.expectedReturnDate}" pattern="dd/MM/yyyy"/></td>
+                <td>${loan.movieTitle}</td>
+                <td><fmt:formatDate value="${loan.startDate}" pattern="dd/MM/yyyy"/></td>
+                <td><fmt:formatDate value="${loan.expectedDate}" pattern="dd/MM/yyyy"/></td>
+
+                <c:if test="${loan.returnDate == null}">
                 <td>
-                    <c:if test="${loan.actualReturnDate == null}">
-                        <form method="POST" action="returnBook">
-                            <input type="hidden" name="loanId" value="${loan.loanId}"/>
-                            <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('¿Are you sure to return this movie?');">Return</button>
-                        </form>
-                    </c:if>
-                    <c:if test="${loan.actualReturnDate != null}">
-                        <span class="badge bg-success">Returned</span>
-                    </c:if>
+                    —
                 </td>
+                <td>
+                    <form method="POST" action="loanMovie">
+                        <input type="hidden" name="idLoan" value="${loan.idLoan}"/>
+                        <input type="hidden" name="action" value="return">
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to return this movie?');">Return</button>
+                    </form>
+                </td>
+                    </c:if>
+                <c:if test="${loan.returnDate != null}">
+                    <td>
+                            ${loan.returnDate}
+                    </td>
+                    <td>
+                        <span class="badge bg-success">Returned</span>
+                    </td>
+                </c:if>
+
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </main>
-
 </body>
 </html>

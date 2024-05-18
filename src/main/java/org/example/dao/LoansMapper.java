@@ -17,7 +17,8 @@ public class LoansMapper implements RowMapper<Loan> {
                 rs.getInt("idMovie"),
                 rs.getDate("startDate"),
                 rs.getDate("expectedDate"),
-                rs.getDate("returnDate")
+                rs.getDate("returnDate"),
+                rs.getString("movieTitle")
         );
     }
 

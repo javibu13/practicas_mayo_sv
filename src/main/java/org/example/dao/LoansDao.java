@@ -44,6 +44,9 @@ public interface LoansDao {
     @SqlUpdate("UPDATE loans SET returnDate = :returnDate WHERE idMovie = :idMovie AND idUser = :idUser AND returnDate IS NULL")
     void returnLoan(@Bind("idMovie") int idMovie, @Bind("idUser") int idUser, @Bind("returnDate") java.sql.Date returnDate);
 
+    @SqlUpdate("UPDATE loans SET returnDate = :returnDate WHERE idLoan = :idLoan AND returnDate IS NULL")
+    void returnLoanById(@Bind("idLoan") int idLoan, @Bind("returnDate") java.sql.Date returnDate);
+
     @SqlQuery("SELECT COUNT(*) FROM loans WHERE idMovie = :idMovie AND idUser = :idUser AND returnDate IS NULL")
     int countActiveLoansByUser(@Bind("idMovie") int idMovie, @Bind("idUser") int idUser);
 }

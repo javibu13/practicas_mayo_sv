@@ -21,35 +21,52 @@ public class LoanMovie extends HttpServlet {
             response.sendRedirect("/login?message=" + URLEncoder.encode("Please, sign in to loan a movie.", StandardCharsets.UTF_8));
             return;
         }
-
-        int idMovie = Integer.parseInt(request.getParameter("idMovie"));
-        int idUser = Integer.parseInt(request.getSession().getAttribute("idUser").toString());
-        String action = request.getParameter("action");
-
-        try {
+        if (request.getParameter("idLoan") != null) {
+            // Modifying loan using idLoan
+            try {
             Database.getInstance().inTransaction(handle -> {
+                int idLoan = Integer.parseInt(request.getParameter("idLoan"));
                 LoansDao loansDao = handle.attach(LoansDao.class);
-                MoviesDao moviesDao = handle.attach(MoviesDao.class);
+                java.sql.Date returnDate = new java.sql.Date(System.currentTimeMillis());
+                loansDao.returnLoanById(idLoan, returnDate);
+                return null;
+                });
+            response.sendRedirect("listLoans");
+            } catch (Exception e) {
+                response.sendRedirect("error?message=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
+            }
+        } else {
+            // Modifying loan using idUser and idMovie
+            int idMovie = Integer.parseInt(request.getParameter("idMovie"));
+            int idUser = Integer.parseInt(request.getSession().getAttribute("idUser").toString());
+            String action = request.getParameter("action");
 
-                if ("rent".equals(action)) {
-                    int getActualStock = moviesDao.getActualStock(idMovie);
-                    if (getActualStock == 0) {
-                        throw new IllegalStateException("Can't process the loan, there is no stock available");
+            try {
+                Database.getInstance().inTransaction(handle -> {
+                    LoansDao loansDao = handle.attach(LoansDao.class);
+                    MoviesDao moviesDao = handle.attach(MoviesDao.class);
+
+                    if ("rent".equals(action)) {
+                        int getActualStock = moviesDao.getActualStock(idMovie);
+                        if (getActualStock == 0) {
+                            throw new IllegalStateException("Can't process the loan, there is no stock available");
+                        }
+
+                        java.sql.Date startDate = new java.sql.Date(System.currentTimeMillis());
+                        java.sql.Date expectedDate = new java.sql.Date(System.currentTimeMillis() + 604800000); // 7 days
+                        loansDao.addLoan(idMovie, idUser, startDate, expectedDate);
+                    } else if ("return".equals(action)) {
+                        java.sql.Date returnDate = new java.sql.Date(System.currentTimeMillis());
+                        loansDao.returnLoan(idMovie, idUser, returnDate);
                     }
 
-                    java.sql.Date startDate = new java.sql.Date(System.currentTimeMillis());
-                    java.sql.Date expectedDate = new java.sql.Date(System.currentTimeMillis() + 604800000); // 7 days
-                    loansDao.addLoan(idMovie, idUser, startDate, expectedDate);
-                } else if ("return".equals(action)) {
-                    java.sql.Date returnDate = new java.sql.Date(System.currentTimeMillis());
-                    loansDao.returnLoan(idMovie, idUser, returnDate);
-                }
-
-                return null;
-            });
-            response.sendRedirect("listMovies");
-        } catch (Exception e) {
-            response.sendRedirect("error?message=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
+                    return null;
+                });
+                response.sendRedirect("listMovies");
+            } catch (Exception e) {
+                response.sendRedirect("error?message=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
+            }
         }
+
     }
 }
