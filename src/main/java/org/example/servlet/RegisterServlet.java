@@ -10,9 +10,7 @@ import java.io.IOException;
 import org.example.dao.Database;
 import org.example.dao.UsersDao;
 
-import static org.example.util.PasswordUtils.hashPassword;
-
-@WebServlet("/register")
+@WebServlet("/signup")
 public class RegisterServlet extends HttpServlet {
 
     @Override
