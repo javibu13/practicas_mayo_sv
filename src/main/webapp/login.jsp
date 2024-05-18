@@ -54,7 +54,7 @@
         <div class="col-12 col-sm-9 col-md-6 m-auto">
             <div class="panel">
                 <form id="loginForm" action="login" method="post">
-                    <h3 class="mb-3 fw-normal">Login</h1>
+                    <h3 class="mb-3 fw-normal">Login</h3>
 
                     <div class="form-floating mb-3">
                         <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="nombre@example.com">
@@ -76,3 +76,4 @@
         </div>
     </main>
 </body>
+</html>

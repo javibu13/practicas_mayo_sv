@@ -18,3 +18,7 @@ div.panel {
     background-color: #fafafa;
     box-shadow: 0 0 30px #30303030;
 }
+
+img.fixed-table-image-size {
+    width: 100px;
+}
