@@ -10,11 +10,11 @@ import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 import java.util.List;
 
 public interface MoviesDao {
-    @SqlQuery("SELECT * FROM MOVIE")
+    @SqlQuery("SELECT * FROM MOVIES")
     @UseRowMapper(MoviesMapper.class)
     List<Movie> getAllMovies();
 
-    @SqlQuery("SELECT * FROM MOVIE WHERE idMovie LIKE CONCAT('%',:searchTerm,'%') " +
+    @SqlQuery("SELECT * FROM MOVIES WHERE idMovie LIKE CONCAT('%',:searchTerm,'%') " +
             "OR title LIKE CONCAT('%',:searchTerm,'%') OR director LIKE CONCAT('%',:searchTerm,'%')")
     @UseRowMapper(MoviesMapper.class)
     List<Movie> getMovie(@Bind("searchTerm") String searchTerm);
