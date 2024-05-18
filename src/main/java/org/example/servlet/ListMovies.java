@@ -21,6 +21,8 @@ public class ListMovies  extends HttpServlet {
                 try{
             List<Movie> movies = Database.getInstance().withExtension(MoviesDao.class, MoviesDao::getAllMovies);
             request.setAttribute("movies", movies);
+            String stringStaticPath = request.getContextPath() + "/static/";
+            request.setAttribute("staticPath", stringStaticPath);
             request.getRequestDispatcher("/listMovies.jsp").forward(request, response);
         } catch (Exception e){
             e.printStackTrace();
