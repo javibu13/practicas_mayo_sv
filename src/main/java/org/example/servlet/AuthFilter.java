@@ -25,7 +25,11 @@ public class AuthFilter implements Filter {
         boolean staticResource = req.getRequestURI().startsWith(req.getContextPath() + "/static/");
 
         if (loggedIn || loginRequest || registerRequest || staticResource /*|| registerjspRequest*/) {
-            chain.doFilter(request, response);
+            if (loggedIn && (loginRequest || registerRequest)) {
+                ((HttpServletResponse) response).sendRedirect("listMovies");
+            } else {
+                chain.doFilter(request, response);
+            }
         } else {
             ((HttpServletResponse) response).sendRedirect(loginURI);
         }

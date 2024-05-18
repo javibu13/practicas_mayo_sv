@@ -27,9 +27,9 @@
                 data: formData,
                 success: function(response) {
                     if (response === "success") {
-                        window.location.href = "/Videoclub/";
+                        window.location.href = "/Videoclub/listMovies";
                     } else {
-                        $("#result").html("<div class='alert alert-danger' role='alert'>" + response + "</div>");
+                        $("#result").html("<div class='alert alert-danger' role='alert'>Something went wrong</div>");
                     }
                 },
                 error: function(xhr) {

@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
                     HttpSession session = request.getSession(true);
                     session.setAttribute("idUser", userFromDB.getIdUser());
-                    response.sendRedirect("listMovies");
+                    // response.sendRedirect("listMovies");
                 } else {
                     response.setStatus(HttpServletResponse.SC_CONFLICT);
                     response.getWriter().write("Incorrect password");
