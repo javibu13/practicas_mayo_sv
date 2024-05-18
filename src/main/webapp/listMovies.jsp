@@ -8,7 +8,7 @@
 <div class="container">
     <h1 class="mt-5">List of Movies</h1>
     <table class="" data-toggle="table" data-pagination="true" data-search="true">
-        <thead>
+        <thead class="table-dark">
         <tr>
             <th data-align="center" data-halign="center">Title</th>
             <th data-align="center" data-halign="center">Director</th>
