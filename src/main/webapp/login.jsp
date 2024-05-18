@@ -19,32 +19,27 @@
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            const formDataTmp = $("form").serialize();
+            const formDataTmp = $("#loginForm").serialize();
             const formData = formDataTmp.split("password=")[0] + "password=" + hashHex;
 
-            try {
-                const response = await fetch('signin', {
-                method: 'POST',
-                body: formData
-                });
-
-                if (response.ok) {
-                    const text = await response.text();
-                    if (text === "success") {
-                        window.location.href = "/Videoclub/login";
+            $.ajax("login", {
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    if (response === "success") {
+                        window.location.href = "/Videoclub/";
                     } else {
-                        document.getElementById('result').innerHTML = `<div class='alert alert-danger' role='alert'>${text}</div>`;
+                        $("#result").html("<div class='alert alert-danger' role='alert'>" + response + "</div>");
                     }
-                } else {
-                    if (response.status === 409) {
-                        document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Email already in use.</div>";
+                },
+                error: function(xhr) {
+                    if (xhr.status === 409) {
+                        $("#result").html("<div class='alert alert-danger' role='alert'>Email already in use.</div>");
                     } else {
-                        document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Error during registration process.</div>";
+                        $("#result").html("<div class='alert alert-danger' role='alert'>Error during registration process .</div>");
                     }
                 }
-            } catch (error) {
-                document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Error during registration process.</div>";
-            }
+            });
         });
     });
 </script>
@@ -58,7 +53,7 @@
     <main class="row">
         <div class="col-12 col-sm-9 col-md-6 m-auto">
             <div class="panel">
-                <form action="login" method="post">
+                <form id="loginForm" action="login" method="post">
                     <h3 class="mb-3 fw-normal">Login</h1>
 
                     <div class="form-floating mb-3">

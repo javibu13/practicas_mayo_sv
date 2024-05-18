@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("form").on("submit", async event => {
+        $("form").on("submit", async function(event) {
             event.preventDefault();
             const passwordField = document.getElementById('password');
             const password = passwordField.value;
@@ -20,31 +20,27 @@
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             const formDataTmp = $(this).serialize();
+            console.log(formDataTmp);
             const formData = formDataTmp.split("password=")[0] + "password=" + hashHex;
-
-            try {
-                const response = await fetch('signup', {
-                method: 'POST',
-                body: formData
-                });
-
-                if (response.ok) {
-                    const text = await response.text();
-                    if (text === "success") {
+            console.log(formData);
+            $.ajax("register", {
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    if (response === "success") {
                         window.location.href = "/Videoclub/login";
                     } else {
-                        document.getElementById('result').innerHTML = `<div class='alert alert-danger' role='alert'>${text}</div>`;
+                        $("#result").html("<div class='alert alert-danger' role='alert'>" + response + "</div>");
                     }
-                } else {
-                    if (response.status === 409) {
-                        document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Email already in use.</div>";
+                },
+                error: function(xhr) {
+                    if (xhr.status === 409) {
+                        $("#result").html("<div class='alert alert-danger' role='alert'>Email already in use.</div>");
                     } else {
-                        document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Error during registration process.</div>";
+                        $("#result").html("<div class='alert alert-danger' role='alert'>Error during registration process .</div>");
                     }
                 }
-            } catch (error) {
-                document.getElementById('result').innerHTML = "<div class='alert alert-danger' role='alert'>Error during registration process.</div>";
-            }
+            });
         });
     });
 </script>

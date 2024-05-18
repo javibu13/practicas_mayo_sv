@@ -10,11 +10,21 @@ import java.io.IOException;
 import org.example.dao.Database;
 import org.example.dao.UsersDao;
 
-@WebServlet("/signup")
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        try {
+            request.setAttribute("headTitle", "Register");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServletException("Error loading login view", e);
+        }
+    }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
@@ -22,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
         String password = request.getParameter("password");
-
+        
         try {
             boolean emailExists = Database.getInstance().withExtension(UsersDao.class, dao -> {
                 return dao.emailExists(email);
