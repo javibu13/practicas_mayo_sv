@@ -3,17 +3,17 @@
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 ">
-                <h1 class="h4">Desengaño 21</h1>
+                <h1 class="h4"><a href="/Videoclub/">Desengaño 21</a></h1>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/Videoclub/Records">Records</a>
+                            <a class="nav-link" href="/Videoclub/records">Records</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Videoclub/Profile">Profile</a>
+                            <a class="nav-link" href="/Videoclub/profile">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Videoclub/Logout">Logout</a>
+                            <a class="nav-link" href="/Videoclub/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
