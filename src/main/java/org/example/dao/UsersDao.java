@@ -19,6 +19,8 @@ public interface UsersDao {
     @UseRowMapper(UsersMapper.class)
     List<User> getUsers(@Bind("searchTerm") String searchTerm);
 
+    @SqlQuery("SELECT idUser, firstName, lastName, email, phoneNumber, password FROM users WHERE idUser = :idUser")
+    User getUserById(@Bind("idUser") int idUser);
     @SqlQuery("SELECT * FROM USERS WHERE idUser = ?")
     @UseRowMapper(UsersMapper.class)
     User getUser(int idUser);
@@ -35,6 +37,12 @@ public interface UsersDao {
 
     @SqlUpdate("DELETE FROM USERS WHERE idUser = ?")
     void removeUser(int idUser);
+
+    @SqlQuery("SELECT password FROM users WHERE idUser = :idUser")
+    String getPasswordByUserId(@Bind("idUser") int idUser);
+
+    @SqlUpdate("UPDATE users SET password = :password WHERE idUser = :idUser")
+    void updatePassword(@Bind("idUser") int idUser, @Bind("password") String password);
     
     @SqlQuery("SELECT COUNT(*) FROM users WHERE email = :email")
     boolean emailExists(@Bind("email") String email);

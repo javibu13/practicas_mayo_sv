@@ -1,49 +1,43 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Portatil
-  Date: 17/05/2024
-  Time: 13:41
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <main class="container my-4">
-    <h1 class="text-center mb-4">Tu Perfil</h1>
-    <form action="ShowProfileServlet" method="POST" class="mb-3">
+    <h1 class="text-center mb-4">Your Profile</h1>
+    <c:if test="${not empty param.error}">
+        <div class="alert alert-danger">${param.error}</div>
+    </c:if>
+    <c:if test="${not empty param.success}">
+        <div class="alert alert-success">${param.success}</div>
+    </c:if>
+
         <div class="form-group">
-            <label for="firstName">Nombre:</label>
-            <input type="text" id="firstName" name="firstName" class="form-control" value="${user.firstName}" required>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" value="${user.firstName}" readonly>
         </div>
         <div class="form-group">
-            <label for="lastName">Apellido:</label>
-            <input type="text" id="lastName" name="lastName" class="form-control" value="${user.lastName}" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" value="${user.lastName}" readonly>
         </div>
         <div class="form-group">
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" name="email" class="form-control" value="${user.email}" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" value="${user.email}" readonly>
         </div>
         <div class="form-group">
-            <label for="phoneNumber">Número de Teléfono:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${user.phoneNumber}">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${user.phoneNumber}" readonly>
         </div>
+
+        <form action="changePassword" method="POST" class="mb-3">
         <div class="form-group">
-            <label for="address">Dirección:</label>
-            <input type="text" id="address" name="address" class="form-control" value="${user.address}">
-        </div>
-        <button type="submit" class="btn btn-primary">Actualizar Información</button>
-    </form>
-    <form action="ChangePasswordServlet" method="POST" class="mb-3">
-        <div class="form-group">
-            <label for="currentPassword">Contraseña Actual:</label>
+            <label for="currentPassword">Current Password:</label>
             <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
         </div>
         <div class="form-group">
-            <label for="newPassword">Nueva Contraseña:</label>
+            <label for="newPassword">New Password:</label>
             <input type="password" class="form-control" id="newPassword" name="newPassword" required>
         </div>
         <div class="form-group">
-            <label for="confirmPassword">Confirmar Nueva Contraseña:</label>
+            <label for="confirmPassword">Confirm New Password:</label>
             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
         </div>
-        <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+        <button type="submit" class="btn btn-success">Change Password</button>
     </form>
 </main>
