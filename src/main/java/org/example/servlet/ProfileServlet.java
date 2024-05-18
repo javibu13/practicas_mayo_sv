@@ -17,7 +17,7 @@ public class ProfileServlet extends HttpServlet {
         Integer idUser = (Integer) session.getAttribute("idUser");
 
         if (idUser == null) {
-            response.sendRedirect("login");
+            response.sendRedirect("login.jsp");
             return;
         }
 
