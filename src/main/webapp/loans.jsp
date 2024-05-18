@@ -1,21 +1,20 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Active Loans</title>
-</head>
+<%@ include file="/includes/commonStartDoc.jsp" %>
+
 <body>
+<%@ include file="/includes/headerBar.jsp" %>
 <main class="container mt-5">
     <h1 class="text-center mb-3">Active Loans</h1>
-    <table class="table table-hover table-striped">
+    <table class="" data-toggle="table" data-pagination="true" data-search="true" data-search-highlight="true" data-sortable="true">
         <thead class="table-dark">
         <tr>
-            <th>Movie Title</th>
-            <th>Loan Start Date</th>
-            <th>Expected Return Date</th>
-            <th>Returned Date</th>
-            <th>Actions</th>
+            <th data-align="center" data-halign="center" data-sortable="true">Movie Title</th>
+            <th data-align="center" data-halign="center" data-sortable="true">Loan Start Date</th>
+            <th data-align="center" data-halign="center" data-sortable="true">Expected Return Date</th>
+            <th data-align="center" data-halign="center" data-sortable="true">Returned Date</th>
+            <th data-align="center" data-halign="center" data-sortable="false">Status</th>
         </tr>
         </thead>
         <tbody>

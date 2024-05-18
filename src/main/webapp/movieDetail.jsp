@@ -8,9 +8,9 @@
 <body>
 <%@ include file="/includes/headerBar.jsp" %>
 <main class="row">
-    <div class="col-12 col-sm-9 col-md-6 m-auto">
+    <div class="col-12 col-sm-9 col-md-8 m-auto">
         <div class="panel">
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-12 col-md-4">
                     <img src="${staticPath}${movie.path}" alt="${movie.title}" class="fixed-details-image-size">
                 </div>
