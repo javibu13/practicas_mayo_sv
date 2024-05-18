@@ -29,8 +29,9 @@ public class AuthFilter implements Filter {
                 ((HttpServletResponse) response).sendRedirect("listMovies");
             } else if (loggedIn && req.getRequestURI().equals("/Videoclub/")) {
                 ((HttpServletResponse) response).sendRedirect("login");
+            } else {
+                chain.doFilter(request, response);
             }
-            chain.doFilter(request, response);
         } else {
             ((HttpServletResponse) response).sendRedirect(loginURI);
         }
