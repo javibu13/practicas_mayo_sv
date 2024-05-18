@@ -20,6 +20,7 @@ public class MovieDetails extends HttpServlet {
         if (movieId != null) {
             try {
                 Movie movie = Database.getInstance().withExtension(MoviesDao.class, dao -> dao.getMovie(Integer.parseInt(movieId)));
+                int movieAvailable = Database.getInstance().withExtension(MoviesDao.class, dao -> dao.getActualStock(Integer.parseInt(movieId)));
                 if (userId != null) {
                     int activeLoans = Database.getInstance().withExtension(LoansDao.class, dao -> dao.countActiveLoansByUser(Integer.parseInt(movieId), userId));
                     movie.setRentedByUser(activeLoans > 0);
@@ -27,6 +28,7 @@ public class MovieDetails extends HttpServlet {
                 request.setAttribute("movie", movie);
                 String stringStaticPath = request.getContextPath() + "/static/";
                 request.setAttribute("staticPath", stringStaticPath);
+                request.setAttribute("availableStock", movieAvailable);
                 request.getRequestDispatcher("/movieDetail.jsp").forward(request, response);
             } catch (Exception e) {
                 throw new ServletException("Error retrieving movie details", e);
